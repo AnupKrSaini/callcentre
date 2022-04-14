@@ -1,0 +1,31 @@
+
+* a { color: #ef4e57;}
+
+h5, .h5 { color: #ef4e57; text-transform: none;}
+
+.icRight { position: relative; margin-top: 15px;  }
+
+.page-main-header .main-header-right svg line {color: #2f3c4e;}
+
+.page-main-header .main-header-right .nav-right ul li svg { color: #ef4e57;}
+
+.page-main-header .main-header-right .nav-right ul li .dot { background-color: #ef4e57;}
+
+.page-main-header .main-header-right .nav-right ul li .media .dotted-animation .animate-circle { border: 5px solid #ef4e57;}
+
+.page-main-header .main-header-right .nav-right ul li .media .dotted-animation .main-circle {background-color: #ef4e57;}
+
+.card .card-header h5{text-transform: none; font-weight: 400;}
+
+.form-control{ border-color: #dee2e6 !important;}
+
+.pagination-primary .page-item .page-link {color: #2f3c4e;}
+.pagination-primary .page-item.active .page-link {color: #fff; background-color: #ef4e57; border-color: #ef4e57;}
+
+.checkbox_animated:before{border-color: #ef4e57;}
+.radio_animated:before { background: #ef4e57;}
+
+.authentication-box .btn-primary { background-color: #2f3c4e !important; border-color: #2f3c4e  !important;}
+
+.text-orng{ color:#fa9029 !important;}
+.text-red{ color:#ff0000 !important;}
