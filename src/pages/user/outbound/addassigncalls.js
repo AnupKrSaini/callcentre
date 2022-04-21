@@ -19,12 +19,12 @@ const AddAssignCalls = () => {
     const [LoginId, setLoginId] = useState(localStorage.LoggedInUser == undefined ? "" : localStorage.LoggedInUser);
     const [UserTypeId, setUserTypeId] = useState(localStorage.UserType == undefined ? "" : localStorage.UserType);
     const [LMobileNo, setLMobileNo] = useState(localStorage.MobileNo == undefined ? "" : localStorage.MobileNo);
-    const[PBXfrom,setPBXfrom]=useState("1000");
-    const[PBXto,setPBXto]=useState("09891498354");
+    const[PBXfrom,setPBXfrom]=useState(localStorage.ExtenNo == undefined ? "" : localStorage.ExtenNo);
+    const[PBXto,setPBXto]=useState("0");
     const navigate = useHistory();
     const calendarRef = React.createRef();
     const timerRef = React.createRef();
-
+    const [inputCustomerMob, setinputCustomerMob] = useState('')
     const[Sldate,setSldate]=useState("");
     const[Sltime,setSltime]=useState("");
     const [startDate,setstartDate] = useState(new Date());
@@ -218,6 +218,7 @@ const[Dbresult,setDbresult]=useState(null);
                 if (data.Success == true) {
                     let ds = data.Data;
                     if (ds != null) {
+                        setPBXto(ds.CustomerMobile);
                    await setDbresult(data.Data);
 
                     }
@@ -345,6 +346,7 @@ const[Dbresult,setDbresult]=useState(null);
                         SweetAlert.fire({ title: "Success!", text: "Update  and close call has been successfully!", icon: "success" });
                         setModal(false);
                         setErrorModal(false);
+                        setModify(false);
                         localStorage.removeItem('CallingId');
                         navigate.push('/user/outbound/assignedcalls');
                         formik.resetForm();
@@ -357,6 +359,7 @@ const[Dbresult,setDbresult]=useState(null);
                             SetModalBodyHtml(Errtext);
                              setModal(!modal);
                              setErrorModal(true);
+                             setModify(false);
                          }
 
                     }
@@ -526,8 +529,91 @@ async function asyncFuncCallCentreDepartmentDDL() {
         
     }
     const PBXClicktoCallHandler=()=>{
-        asyncFunclicktocallpbx();
+        asyncFunBindCallingEditmob();
+        
      }
+     async function asyncFunBindCallingEditmob() {
+        if(Dbresult!=null)
+        {
+            setPBXto(Dbresult.CustomerMobile);
+          setModal(!modal);
+          setModify(true);
+          setErrorModal(false);
+        }                  
+    
+    }
+    const changeCustMobHandle=(e) => {
+    setPBXto(e.target.value);
+    }
+    const updateMobHandler = () => {
+    setModal(!modal);
+    if (PBXto==""||PBXto.length<8) {
+    SweetAlert.fire({ title: "Incomplete Mobile", text: "Please enter correct mobile no.", icon: "warning" });
+    }
+    else{
+    
+    asyncFunCustomerMobileUpdate();
+    }
+    
+    }
+    
+    async function asyncFunCustomerMobileUpdate()
+    {
+    try {
+    
+    setModal(false);
+    setErrorModal(false);
+    setErrorPopUp(""); 
+    let url=ConnectionInstance+ 'outboundcalling/SETUPDATEOutboundCallCustomerMobByID';
+    
+    let options = {
+    method: 'POST',
+    url: url,
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json;charset=UTF-8'
+    },
+    data:{ CallingId: `${CallingId}`,CustomerMobile:`${PBXto}`,ModifiedBy:`${LoginId}`}
+    };
+    
+    let response = await axios(options);
+    let responseOK = response && response.status == 200;
+    if (responseOK) {
+    let data = response.data;
+    // let data = await response.data;
+    if(data.Success==true && data.Data=="2000")
+    { 
+      setModal(false);
+      asyncFunclicktocallpbx();
+      asyncFunBindAddAssignedCallUserId();
+     
+      setErrorModal(false);
+    
+    }
+    else{
+       if(data.ErrorList!=null && data.ErrorList.length>0)
+       {
+          let Errtext=<p><div className='text-required'>{data.ErrorList[0].errorMsg} </div></p>;
+          setErrorPopUp(Errtext); 
+          setModal(!modal);
+          setErrorModal(true);
+       }
+      
+    }
+    
+    
+    }
+    else{
+    console.log('no record found');
+    }
+    // return data;
+    } catch (error) {
+    console.log(error.message);
+    let Errtext=<p><div className='text-required'>You may not be connected to a network or Unable to connect to a server</div></p>;
+    setErrorPopUp(Errtext);
+    setErrorModal(true);
+    }
+    }
     async function asyncFunclicktocallpbx() {
         try {
             setIsLoadButton(true);
@@ -590,6 +676,10 @@ async function asyncFuncCallCentreDepartmentDDL() {
                 setErrorModal(true);
              }
     }
+
+   
+  
+    
     const openDatepicker = () => this._calendar.setOpen(true);
     return (
         <>
@@ -611,7 +701,8 @@ async function asyncFuncCallCentreDepartmentDDL() {
                                     <div className='col-md-6 col-lg-3'>
                                         <div className="form-group">
                                             <label className="col-form-label"><b>Mobile</b></label>
-                                            <span className="form-control-plaintext" >{Dbresult.CustomerMobile==null?'N/A':Dbresult.CustomerMobile}</span>
+                                            { <span className="form-control-plaintext" >{Dbresult.CustomerMobile==null?'N/A':Dbresult.CustomerMobile}</span>}
+                                            {/* <span className="form-control-plaintext" >{Dbresult.CustomerMobile==null?'N/A':Dbresult.CustomerMobile}</span> */}
                                         </div>
                                     </div>
                                     <div className='col-md-6 col-lg-3'>
@@ -937,52 +1028,24 @@ async function asyncFuncCallCentreDepartmentDDL() {
             <Modal isOpen={modal} toggle={toggleModal} centered={true}>
                 {modify ?
                     <>
-                        <ModalHeader toggle={toggleModal}>Edit Personal Detail</ModalHeader>
-                        <ModalBody>
-                            <form>
-                                <div className="form-group">
-                                    <label className="col-form-label">Customer Name:</label>
-                                    <input className="form-control" type="text" value="Manish" disabled />
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-form-label">Mobile:</label>
-                                    <input className="form-control" type="text" value="9953685212" disabled />
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-form-label" htmlFor="recipient-name">Gender:</label>
-                                    <select className="form-control">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-form-label">State:</label>
-                                    <select className="form-control">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">State 1</option>
-                                        <option value="2">State 2</option>
-                                        <option value="3">State 3</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-form-label">City:</label>
-                                    <select className="form-control">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">City 1</option>
-                                        <option value="2">City 2</option>
-                                        <option value="3">City 3</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-form-label">Pincode:</label>
-                                    <input className="form-control" type="text" />
-                                </div>
-                            </form>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button color="secondary" onClick={toggleModal}>Cancel</Button>
-                            <Button color="primary" onClick={updateHandler}>Update</Button>
+                    <ModalHeader toggle={toggleModal}>Edit Customer Mobile Detail</ModalHeader>
+                    <ModalBody>
+                        <form>
+                            {/* <div className="form-group">
+                                <label className="col-form-label">Customer Name:</label>
+                                <input className="form-control" type="text" value="Manish" disabled />
+                            </div> */}
+                            <div className="form-group">
+                                <label className="col-form-label">Mobile:</label>
+                               
+                            </div> <input className="form-control" type="text"  id='txtcustmobile'   value={PBXto} onChange={changeCustMobHandle}   name='txtcustmobile'  />
+                           
+                        </form>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={toggleModal}>Cancel</Button>
+                        <Button color="primary" onClick={updateMobHandler}>Update and Calling</Button>
+
                         </ModalFooter>
                     </>
                     : null}

@@ -82,6 +82,7 @@ const Signin = ({ history }) => {
                             localStorage.removeItem('UserType');
                             localStorage.removeItem("currentUser");
                             localStorage.removeItem("MobileNo");
+                            localStorage.removeItem("ExtenNo");
 
 
                             localStorage.setItem('Session', "Active");
@@ -90,6 +91,7 @@ const Signin = ({ history }) => {
                             localStorage.setItem('UserTypeName', ds.UserTypeName);
                             localStorage.setItem('UserType', ds.UserTypeId);
                             localStorage.setItem("MobileNo",ds.MobileNo);
+                            localStorage.setItem("ExtenNo",ds.ExtenNo);
                             localStorage.setItem("currentUser", true);
                             setValue(man);
                             localStorage.setItem('token', Jwt_token);
@@ -118,14 +120,14 @@ const Signin = ({ history }) => {
                     }
                     else {
 
-                        SweetAlert.fire({ title: "Wrong Credentials", text: "Enter correct email and password", icon: "info" });
+                        SweetAlert.fire({ title: "Wrong Credentials", text: "Enter correct username and password", icon: "info" });
                         setIsLoader(false);
                     }
 
                 }
                 else {
 
-                    SweetAlert.fire({ title: "Wrong Credentials", text: "Enter correct email and password", icon: "info" });
+                    SweetAlert.fire({ title: "Wrong Credentials", text: "Enter correct username and password", icon: "info" });
                     setIsLoader(false);
                 }
             }
@@ -195,7 +197,7 @@ const Signin = ({ history }) => {
                                                         <input className="form-control" type="email" name="email"
                                                             value={username}
                                                             onChange={e => setusername(e.target.value)}
-                                                            placeholder="Email address"
+                                                            placeholder="User name"
                                                         />
 
                                                     </div>
@@ -203,7 +205,7 @@ const Signin = ({ history }) => {
                                                         <label className="col-form-label">{Password}</label>
                                                         <input className="form-control" type="password" name="password"
                                                             value={password}
-                                                            onChange={e => setPassword(e.target.value)} />
+                                                            onChange={e => setPassword(e.target.value)}  placeholder="password" />
 
                                                     </div>
                                                     <div className="checkbox p-0">

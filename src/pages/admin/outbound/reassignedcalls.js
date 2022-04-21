@@ -285,10 +285,12 @@ const ReAssignedCalls = () => {
                     let data = response.data;
                     // let data = await response.data;
                     if(data.Success==true && data.Data=="2000")
-                    {
-                       
-                        SweetAlert.fire({ title: "Success!", text: "Calls have been Assigned Successfully!", icon: "success" });
+                    {  
+                        SetPageHelper({
+                            dsAssignedCallDlists:null
+                        })
                         asyncFunBindAutomatedCallDetails(1, 10);
+                        SweetAlert.fire({ title: "Success!", text: "Calls have been Assigned Successfully!", icon: "success" });
                         setModal(false);
                         setErrorModal(false);
                         formik.resetForm();
@@ -395,7 +397,7 @@ const ReAssignedCalls = () => {
         asyncFunBindAutomatedCallDetails(1, 10);
     }, [PageHelper]);
 
-    async function  asyncFunBindAutomatedCallDetails(PageNo, PageSize,SourceCatId) {
+    async function  asyncFunBindAutomatedCallDetails(PageNo, PageSize) {
         try {
          
         let url=ConnectionInstance+ 'OutboundCalling/GetCallCentreReAssignedCalls';
@@ -415,6 +417,7 @@ const ReAssignedCalls = () => {
 
                 // let data = await response.data;
                 if (data.Success == true) {
+                 
                     let ds = data.Data;
                     if (ds != null) {
 

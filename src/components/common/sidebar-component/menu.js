@@ -38,6 +38,8 @@ const UserType=localStorage.UserType == undefined ? "" : localStorage.UserType;
                 { path: '/admin/purposemanagement', title: 'Purpose Management', type: 'link' },
                 { path: '/admin/sourcemanagement', title: 'Source Management', type: 'link' },
                 { path: '/admin/teammanagement', title: 'Team Management', type: 'link' },
+                { path: '/admin/pbxUserExtensionmaster', title: 'PBX Extension Users', type: 'link' },
+                { path: '/admin/PbxcallType', title: 'PBX Call Type', type: 'link' },
                 // { path: '/pages/admin/DepartmentManagement', title: 'Department Management', type: 'link' },
                // { path: '/admin/apimanagement', title: 'API Management', type: 'link' },
                 // { path: '/pages/admin/AddOutboundCalling', title: 'Add Outbound Calling', type: 'link' },

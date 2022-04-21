@@ -151,16 +151,25 @@ const Root = (props) => {
         const id2= setInterval(() => {
             AutopbxclickpullindexDetails();
             console.log('test2');
-          }, 1* 60 *1000);
+          }, 2* 60 *1000);
           return () => clearInterval(id2);    
       
 }, []);
+
+useEffect(() => {
+       
+    const id3= setInterval(() => {
+        AutoReleasePBXStatusBehalf();
+        console.log('test3');
+      }, 3* 60 *1000);
+      return () => clearInterval(id3);    
+    }, []);
 async function AutopbxclickpullindexDetails()
      {
 
         try {
 
-            let url=ConnectionInstance+ 'pbxcall/pbxclicktocallindex';
+            let url=ConnectionInstance+ 'pbxcall/pbxclicktocallsbyIds';
 
             let options = {
                 method: 'GET',
@@ -207,6 +216,52 @@ async function AutopbxclickpullindexDetails()
         try {
 
             let url=ConnectionInstance+ 'OutboundCalling/SETOutBoundAutoReleaseAssignedCalls';
+
+            let options = {
+                method: 'POST',
+                url: url,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+              data:{ }
+            };
+
+            let response = await axios(options);
+                let responseOK = response && response.status == 200;
+                if (responseOK) {
+                    let data = response.data;
+                    // let data = await response.data;
+                    if(data.Success==true && data.Data=="2000")
+                    {                        
+                        console.log(true);
+                    }
+                    else{
+                         if(data.ErrorList!=null && data.ErrorList.length>0)
+                         {
+                            let Errtext=<p><div className='text-required'>{data.ErrorList[0].errorMsg} </div></p>;
+                            console.log(Errtext);
+                         }
+
+                    }
+
+
+                }
+                else{
+                    console.log('no record found');
+
+                }
+             // return data;
+            } catch (error) {
+                console.log(error.message);       
+             }
+     }
+     async function AutoReleasePBXStatusBehalf()
+     {
+
+        try {
+
+            let url=ConnectionInstance+ 'OutboundCalling/SETOutBoundAutoClicktocallNoAnsCalls';
 
             let options = {
                 method: 'POST',
