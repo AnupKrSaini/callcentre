@@ -689,11 +689,7 @@ async function asyncFunclicktocallpbx() {
             setErrorModal(true);
          }
 }
-// const editmobHandler = () => {
- 
-//     asyncFunBindCallingEditmob();
-   
-// }
+
 
 
     const openDatepicker = () => this._calendar.setOpen(true);
@@ -762,11 +758,16 @@ async function asyncFunclicktocallpbx() {
                             </div>
                         </div>
 
-                        <div className="card">
+                        <div className="card pageDivDisble">
+                        
                             <div className='card-header pb-0'>
                                 <h5>Home Collection</h5>
                             </div>
+                            <div className='pageUnderConstruction'>
+                            <h1 >Under Development</h1>
+                            </div>
                             <div className="card-body">
+                            
                                 <div className='row justify-content-between'>
                                     <div className='col-md-6 col-lg-5'>
                                         <div className="form-group">
@@ -790,9 +791,12 @@ async function asyncFunclicktocallpbx() {
                             </div>
                         </div>
 
-                        <div className="card">
+                        <div className="card pageDivDisble">
                             <div className='card-header pb-0'>
                                 <h5>Report</h5>
+                            </div>
+                            <div className='pageUnderConstruction'>
+                            <h1 >Under Development</h1>
                             </div>
                             <div className="card-body">
                                 <div className='row'>
@@ -822,9 +826,12 @@ async function asyncFunclicktocallpbx() {
                             </div>
                         </div>
 
-                        <div className="card">
+                        <div className="card pageDivDisble">
                             <div className='card-header pb-0'>
                                 <h5>Sample Quotation</h5>
+                            </div>
+                            <div className='pageUnderConstruction'>
+                            <h1 >Under Development</h1>
                             </div>
                             <div className="card-body">
                                 <div className='row'>

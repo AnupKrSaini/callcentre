@@ -102,6 +102,18 @@ h5, .h5 { color: #e31e25; text-transform: none;}
 
 .page-wrapper .page-body-wrapper .page-header .row h3 {text-transform: none;}
 
+/***************22-04-2022*******************/
+
+.pageDivDisble{
+ 
+ z-index:2;opacity:0.4;filter: alpha(opacity = 50);
+ pointer-events: none;
+}
+.pageUnderConstruction{
+  text-align:center;
+  font-size:28px !important;
+ color:#e31e25 !important;
+}
 
 /************21-02-2022***********/
 .stepper-wrapper { /* styles of default stepper */ }

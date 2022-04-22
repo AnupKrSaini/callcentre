@@ -744,110 +744,121 @@ async function asyncFuncCallCentreDepartmentDDL() {
                                 {/* <button className="btn btn-secondary" onClick={modifyHandler}>Modify Personal Detail</button> */}
                             </div>
                         </div>
-
-                        <div className="card">
-                            <div className='card-header pb-0'>
-                                <h5>Home Collection</h5>
-                            </div>
-                            <div className="card-body">
-                                <div className='row justify-content-between'>
-                                    <div className='col-md-6 col-lg-5'>
-                                        <div className="form-group">
-                                            <label className="col-form-label">Location</label>
-                                            <input className="form-control" type="text" />
-                                        </div>
-                                        <div className="form-group text-center">
-                                            <button className="btn btn-secondary btn-sm" type="button" onClick={bookHandler}>Book Appointment</button>
-                                        </div>
+                        <div className="card pageDivDisble">
+                        
+                        <div className='card-header pb-0'>
+                            <h5>Home Collection</h5>
+                        </div>
+                        <div className='pageUnderConstruction'>
+                        <h1 >Under Development</h1>
+                        </div>
+                        <div className="card-body">
+                        
+                            <div className='row justify-content-between'>
+                                <div className='col-md-6 col-lg-5'>
+                                    <div className="form-group">
+                                        <label className="col-form-label">Location</label>
+                                        <input className="form-control" type="text" />
                                     </div>
-                                    <div className='col-md-6 col-lg-5'>
-                                        <div className="form-group">
-                                            <label className="col-form-label">Radiology Location</label>
-                                            <input className="form-control" type="text" />
-                                        </div>
-                                        <div className="form-group text-center">
-                                            <button className="btn btn-secondary btn-sm" type="button" onClick={bookHandler}>Book Appointment</button>
-                                        </div>
+                                    <div className="form-group text-center">
+                                        <button className="btn btn-secondary btn-sm" type="button" onClick={bookHandler}>Book Appointment</button>
+                                    </div>
+                                </div>
+                                <div className='col-md-6 col-lg-5'>
+                                    <div className="form-group">
+                                        <label className="col-form-label">Radiology Location</label>
+                                        <input className="form-control" type="text" />
+                                    </div>
+                                    <div className="form-group text-center">
+                                        <button className="btn btn-secondary btn-sm" type="button" onClick={bookHandler}>Book Appointment</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="card">
-                            <div className='card-header pb-0'>
-                                <h5>Report</h5>
-                            </div>
-                            <div className="card-body">
-                                <div className='row'>
-                                    <div className='col-md-12'>
-                                        <div className="table-responsive">
-                                            <table className="table">
-                                                <thead className='thead-light'>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>UHID/Lab No.</th>
-                                                        <th>Patient</th>
-                                                        <th>Invoice No./ Invoice Date </th>
-                                                        <th>Amount</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className='text-center' colSpan="6">No Data Found</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                    <div className="card pageDivDisble">
+                        <div className='card-header pb-0'>
+                            <h5>Report</h5>
+                        </div>
+                        <div className='pageUnderConstruction'>
+                        <h1 >Under Development</h1>
+                        </div>
+                        <div className="card-body">
+                            <div className='row'>
+                                <div className='col-md-12'>
+                                    <div className="table-responsive">
+                                        <table className="table">
+                                            <thead className='thead-light'>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>UHID/Lab No.</th>
+                                                    <th>Patient</th>
+                                                    <th>Invoice No./ Invoice Date </th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td className='text-center' colSpan="6">No Data Found</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-
                                 </div>
+
                             </div>
                         </div>
+                    </div>
 
-                        <div className="card">
-                            <div className='card-header pb-0'>
-                                <h5>Sample Quotation</h5>
-                            </div>
-                            <div className="card-body">
-                                <div className='row'>
-                                    <div className='col-md-6 col-lg-4'>
-                                        <div className="form-group">
-                                            <label className="col-form-label">Patient Type</label>
-                                            <select className="form-control">
-                                                <option value="0">---Select---</option>
-                                                <option value="1">Walk-in</option>
-                                                <option value="2">Corporate</option>
-                                                <option value="3">Government</option>
-                                                <option value="4">Insurance</option>
-                                                <option value="5">B2B</option>
-                                                <option value="6">IPD</option>
-                                            </select>
-                                        </div>
+                    <div className="card pageDivDisble">
+                        <div className='card-header pb-0'>
+                            <h5>Sample Quotation</h5>
+                        </div>
+                        <div className='pageUnderConstruction'>
+                        <h1 >Under Development</h1>
+                        </div>
+                        <div className="card-body">
+                            <div className='row'>
+                                <div className='col-md-6 col-lg-4'>
+                                    <div className="form-group">
+                                        <label className="col-form-label">Patient Type</label>
+                                        <select className="form-control">
+                                            <option value="0">---Select---</option>
+                                            <option value="1">Walk-in</option>
+                                            <option value="2">Corporate</option>
+                                            <option value="3">Government</option>
+                                            <option value="4">Insurance</option>
+                                            <option value="5">B2B</option>
+                                            <option value="6">IPD</option>
+                                        </select>
                                     </div>
-                                    <div className='col-md-6 col-lg-4'>
-                                        <div className="form-group">
-                                            <label className="col-form-label">Rate Type</label>
-                                            <select className="form-control">
-                                                <option value="0">---Select---</option>
-                                                <option value="1">Standard</option>
-                                                <option value="2">Rate 2</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div className='col-md-6 col-lg-4'>
+                                    <div className="form-group">
+                                        <label className="col-form-label">Rate Type</label>
+                                        <select className="form-control">
+                                            <option value="0">---Select---</option>
+                                            <option value="1">Standard</option>
+                                            <option value="2">Rate 2</option>
+                                        </select>
                                     </div>
-                                    <div className='col-md-12 col-lg-4'>
-                                        <div className="form-group">
-                                            <label className="col-form-label">Add Test</label>
-                                            {/* <input className="form-control" type="text" /> */}
-                                            <div className="input-group mb-3">
-                                                <input type="text" className="form-control" />
-                                                <div className="input-group-append">
-                                                    <button className="btn btn-secondary" type="button"><i className="fa fa-plus"></i></button>
-                                                </div>
+                                </div>
+                                <div className='col-md-12 col-lg-4'>
+                                    <div className="form-group">
+                                        <label className="col-form-label">Add Test</label>
+                                        {/* <input className="form-control" type="text" /> */}
+                                        <div className="input-group mb-3">
+                                            <input type="text" className="form-control" />
+                                            <div className="input-group-append">
+                                                <button className="btn btn-secondary" type="button"><i className="fa fa-plus"></i></button>
                                             </div>
                                         </div>
-
                                     </div>
+
+                                </div>
+                   
                                     {/* <div className='auto'>
                                         <div className="form-group">
                                             <label className="col-form-label">&nbsp;</label>
