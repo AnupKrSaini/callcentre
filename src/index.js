@@ -304,7 +304,7 @@ async function AutopbxclickpullindexDetails()
      }
     return (
         <div className="App">
-            <Auth0Provider domain={auth0.domain} clientId={auth0.clientId} redirectUri={auth0.redirectUri}>
+            {/* <Auth0Provider domain={auth0.domain} clientId={auth0.clientId} redirectUri={auth0.redirectUri}> */}
                 <Provider store={store}>
                     {/* <Provider store={AppStore}> */}
                     <BrowserRouter basename={`/`}>
@@ -331,7 +331,7 @@ async function AutopbxclickpullindexDetails()
                     </BrowserRouter>
                 </Provider>
                 {/* </Provider> */}
-            </Auth0Provider>
+            {/* </Auth0Provider> */}
         </div>
     );
 }

@@ -33,6 +33,7 @@ import ReAssignedCalls from '../pages/admin/outbound/reassignedcalls';
 import ViewReAssignedCalls from '../pages/admin/outbound/viewreassignedcalls';
 import PbxUserExtensionmaster from '../pages/admin/pbxUserExtensionmaster';
  import PbxcallType from '../pages/admin/pbxcallType';
+ import Ldapsync from '../pages/admin/ldapsync';
 
 const Nav= () => {
 
@@ -61,7 +62,8 @@ const Nav= () => {
                                         <Route exact path={`${process.env.PUBLIC_URL}/admin/outbound/viewreassignedcalls`} caseSensitive={false} component={ViewReAssignedCalls} />
                                         <Route exact path={`${process.env.PUBLIC_URL}/admin/pbxUserExtensionmaster`} caseSensitive={false} component={PbxUserExtensionmaster} />
                                         <Route exact path={`${process.env.PUBLIC_URL}/admin/PbxcallType`} caseSensitive={false} component={PbxcallType} />
-                             
+                                        <Route exact path={`${process.env.PUBLIC_URL}/admin/ldapsync`} caseSensitive={false} component={Ldapsync} />
+                                        
                                        {/*     
                                         <Route exact  path={`${process.env.PUBLIC_URL}/pages/admin/UploadCalls`}  caseSensitive={false} component={UploadCalls} />
                                         <Route exact path={`${process.env.PUBLIC_URL}/pages/admin/AutomationCalls`} caseSensitive={false} component={AutomationCalls} />

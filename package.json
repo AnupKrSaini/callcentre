@@ -2,7 +2,7 @@
   "name": "atulaya",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://callcenteratulaya.azurewebsites.net/",
+  "homepage": "http://10.0.1.92:1013/",
   "dependencies": {
     "@auth0/auth0-react": "^1.1.0",
     "@fullcalendar/daygrid": "^4.4.2",
