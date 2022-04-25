@@ -119,8 +119,8 @@ const Signin = ({ history }) => {
                         }
                     }
                     else {
-
-                        SweetAlert.fire({ title: "Wrong Credentials", text: "Enter correct username and password", icon: "info" });
+                        SweetAlert.fire({ title: "Wrong Credentials", text: "Unauthorized user!", icon: "info" });
+                        // SweetAlert.fire({ title: "Wrong Credentials", text: "Enter correct username and password", icon: "info" });
                         setIsLoader(false);
                     }
 
