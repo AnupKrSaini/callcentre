@@ -388,7 +388,9 @@ const AutomationCalls = () => {
        
     }
     useEffect(() => {
-        asyncFunBindAutomatedCallDetails(1, 10);
+        asyncFunBindAutomatedCallDetails(1, 10);   
+    }, []);
+    useEffect(() => {
     }, [PageHelper]);
 
     async function  asyncFunBindAutomatedCallDetails(PageNo, PageSize,SourceCatId) {
@@ -413,7 +415,7 @@ const AutomationCalls = () => {
                 if (data.Success == true) {
                     let ds = data.Data;
                     if (ds != null) {
-
+                        SetPageHelper({});
                         await SetPageHelper({
                             ...PageHelper,
                              PageNo:Number(PageNo),

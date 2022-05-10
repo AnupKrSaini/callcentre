@@ -19,8 +19,9 @@ import EditToolTip from '../../UI/ToolTips/EditToolTip';
  import { useHistory } from 'react-router';
 
 const  AutoCallList=[];
+var FromTeamDDLTXT="0";
 const ReAssignedCalls = () => {
-
+    const [FromTeamDDL, setFromTeamDDL] = useState('0');
     const[currentStep,SetcurrentStep]=useState(1);
     const [TeamMData, SetTeamMData] = useState(0);
     const[UserLogin,SetUserLogin]=useState(1);
@@ -148,6 +149,7 @@ const ReAssignedCalls = () => {
     const [visible, setVisible] = useState(false);
 
     const [value, setValue] = useState('0');
+  
 
     const changeHandler = (e) => {
         setValue(e.target.value);
@@ -161,6 +163,16 @@ const ReAssignedCalls = () => {
         }
     }
 
+    const FromchangeHandler = (e) => {
+        setFromTeamDDL(e.target.value);
+        FromTeamDDLTXT=e.target.value;
+         asyncFunBindAutomatedCallDetails(1, 10);
+
+    
+        //alert(e.target.value);
+        //const s1 = e.target.value;
+      
+    }
     const viewAutocallHandler=async (CallingId) => {
             localStorage.removeItem('CallingId');
             localStorage.setItem('CallingId', CallingId);
@@ -395,7 +407,12 @@ const ReAssignedCalls = () => {
     }
     useEffect(() => {
         asyncFunBindAutomatedCallDetails(1, 10);
-    }, [PageHelper]);
+        // const id2= setInterval(() => {
+        //     //SetPageHelper();
+        //     console.log('test2');
+        //   }, 1* 60 *1000);
+        //   return () => clearInterval(id2);    
+    }, []);
 
     async function  asyncFunBindAutomatedCallDetails(PageNo, PageSize) {
         try {
@@ -408,7 +425,7 @@ const ReAssignedCalls = () => {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json;charset=UTF-8'
                 },
-                data: {  PageNo: `${PageNo}`, PageSize: `${PageSize}` }
+                data: {  PageNo: `${PageNo}`, PageSize: `${PageSize}`,TeamId:`${FromTeamDDLTXT}` }
             };
             let response = await axios(options);
             let responseOK = response && response.status == 200;
@@ -420,7 +437,7 @@ const ReAssignedCalls = () => {
                  
                     let ds = data.Data;
                     if (ds != null) {
-
+                        SetPageHelper({});
                         await SetPageHelper({
                             ...PageHelper,
                              PageNo:Number(PageNo),
@@ -525,7 +542,8 @@ const ReAssignedCalls = () => {
             //   return false;
             // }
         },
-        onSelectAll: ( isSelect,rowData, e) => {
+        onSelectAll: (isSelect, rowData, e) => {
+        
             setSelectDS(null);
             const  AutoCallListSelectedAll=[];
             if (isSelect) {
@@ -623,7 +641,19 @@ const ReAssignedCalls = () => {
                                     <Form.Row className='justify-content-center'>
                                         <Col md={6} lg={4}>
                                         <Form.Group>
-                                                <Form.Label>Team</Form.Label>
+                                                <Form.Label>From Team</Form.Label>
+                                                <Form.Control as="select" id="FromTeamId" name="FromTeamId"  onChange={FromchangeHandler}
+                                                    value={FromTeamDDL}  >
+                                                    <option value='0'>---select---</option>
+                                                    {TeamMData}
+                                                </Form.Control>
+                                              
+                                   
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6} lg={4}>
+                                        <Form.Group>
+                                                <Form.Label>To Team</Form.Label>
                                                 <Form.Control as="select" id="TeamId" name="TeamId"  onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
                                                     value={formik.values.TeamId}  >
@@ -647,6 +677,7 @@ const ReAssignedCalls = () => {
                                     columns={columns}
                                     pagination={paginationFactory(paginationOptions)}
                                     selectRow={ selectRow }
+                                    
 
                                 // cellEdit={cellEditFactory({
                                 //     mode: 'dbclick',//dbclick
