@@ -86,30 +86,32 @@ const Signin = ({ history }) => {
 
 
                             localStorage.setItem('Session', "Active");
-                            localStorage.setItem('LoggedInUser', ds.UserId);
-                            localStorage.setItem('UName', ds.UserName);
-                            localStorage.setItem('UserTypeName', ds.UserTypeName);
-                            localStorage.setItem('UserType', ds.UserTypeId);
-                            localStorage.setItem("MobileNo",ds.MobileNo);
-                            localStorage.setItem("ExtenNo",ds.ExtenNo);
+                            localStorage.setItem('LoggedInUser', ds.objVerifiedUserInfo.UserId);
+                            localStorage.setItem('UName', ds.objVerifiedUserInfo.UserName);
+                            localStorage.setItem('UserType', ds.objVerifiedUserInfo.UserTypeId=="0"?'2':ds.objVerifiedUserInfo.UserTypeId);
+                            localStorage.setItem("MobileNo",ds.objVerifiedUserInfo.MobileNo);
+                            localStorage.setItem("ExtenNo",ds.objVerifiedUserInfo.ExtenNo);
+                            localStorage.setItem("UserGroups", JSON.stringify(ds.objUserAllowGroupsDetailsList));
                             localStorage.setItem("currentUser", true);
                             setValue(man);
                             localStorage.setItem('token', Jwt_token);
+                            //window.location.assign(`${process.env.PUBLIC_URL}/admin/dashboard`);
 
 
-
-                            const UType = ds.UserTypeId;
-                            if (UType === "1" || UType === "2") {
+                            const UType = ds.objVerifiedUserInfo.UserTypeId=="0"?'2':ds.objVerifiedUserInfo.UserTypeId;
+                            if (UType === "0" || UType === "2" ||UType === "1") {
 
                                 // navigate.push(`${process.env.PUBLIC_URL}/admin/dashboard`);
-                                window.location.href = `${process.env.PUBLIC_URL}/admin/dashboard`;
+                                //window.location.href = `${process.env.PUBLIC_URL}/admin/dashboard`;
+                                window.location.assign(`${process.env.PUBLIC_URL}/admin/dashboard`);
                                 setIsLoader(false);
                                 //setLoderWork(false);
 
                             }
                             else if (UType === "3") {
                                 //navigate.push( `${process.env.PUBLIC_URL}/user/dashboard`);
-                                window.location.href = `${process.env.PUBLIC_URL}/user/dashboard`;
+                                //window.location.href = `${process.env.PUBLIC_URL}/user/dashboard`;
+                                window.location.assign(`${process.env.PUBLIC_URL}/user/dashboard`);
                                 setIsLoader(false);
                                 // setLoderWork(false);
                             }
@@ -197,7 +199,7 @@ const Signin = ({ history }) => {
                                                         <input className="form-control" type="email" name="email"
                                                             value={username}
                                                             onChange={e => setusername(e.target.value)}
-                                                            placeholder="User name"
+                                                            placeholder="Email address"
                                                         />
 
                                                     </div>

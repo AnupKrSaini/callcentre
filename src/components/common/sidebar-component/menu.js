@@ -1,78 +1,113 @@
-import {
-    Home,
-    //Box,
-    //Command,
-    Users,
-    Headphones,
-    Search,
-    FileText
-} from 'react-feather';
-import React, {  useState } from 'react';
+import { Home, Users, FileText } from 'react-feather';
+import SweetAlert from 'sweetalert2';
 const menuT=[];
-const UserType=localStorage.UserType == undefined ? "" : localStorage.UserType;
- if(UserType=='1'||UserType=='2')
- {
-    menuT.push(
-        {
-            title: 'Dashboard', icon: Home, type: 'link', path: '/admin/dashboard', active: true
-        },
-        {
-            title: 'Outbound Calls', icon: Headphones, type: 'sub', active: false, children: [
-                { path: '/admin/outbound/assignedcalls', title: 'Assigned Calls', type: 'link' },
-                { path: '/admin/outbound/reassignedcalls', title: 'ReAssigned Calls', type: 'link' },
-                // { path: '/pages/outboundCalling/UnassignedLeads', title: 'Unassign Calls', type: 'link' },
-                // { path: '/pages/outboundCalling/CustomerFollowUp', title: 'Customer Follow Up', type: 'link' },
-            ]
-        },
-        {
-            title: 'Admin', icon: Users, type: 'sub', active: false, children: [
-                {
-                    title: 'Outbound Calls ', type: 'sub', children: [
-                        { title: 'Manual Sheets', type: 'link', path: '/admin/outbound/uploadcalls' },
-                        { title: 'Follow Up Sheets', type: 'link', path: '/admin/outbound/automationcalls' },
-                    ]
-                },
-                // { path: '/pages/admin/UnassignedLeads', title: 'Unassign Calls', type: 'link' },
-                // { path: '/pages/admin/UserManagement', title: 'User Management', type: 'link' },
-                // { path: '/pages/admin/RoleManagement', title: 'Role Management', type: 'link' },
-                { path: '/admin/purposemanagement', title: 'Purpose Management', type: 'link' },
-                { path: '/admin/sourcemanagement', title: 'Source Management', type: 'link' },
-                { path: '/admin/teammanagement', title: 'Team Management', type: 'link' },
-                { path: '/admin/pbxUserExtensionmaster', title: 'PBX Extension Users', type: 'link' },
-                { path: '/admin/PbxcallType', title: 'PBX Call Type', type: 'link' },
-                // { path: '/admin/ldapsync', title: 'LDAP Users Sync Data', type: 'link' },
-                // { path: '/pages/admin/DepartmentManagement', title: 'Department Management', type: 'link' },
-               // { path: '/admin/apimanagement', title: 'API Management', type: 'link' },
-                // { path: '/pages/admin/AddOutboundCalling', title: 'Add Outbound Calling', type: 'link' },
-                // { path: '/pages/admin/ManageOutboundCalling', title: 'Manage Outbound Calling', type: 'link' }, 
-            ]
-        },
-        {
-            //title: 'Search Customers', icon: Search, type: 'link', path: '/pages/SearchCustomers', active: false
-        },
-        // {
-        //     title: 'Reports', icon: FileText, type: 'sub', active: false, children: [
-        //         { path: '/pages/reports/CancelReport', title: 'Cancel Report', type: 'link' },
-        //         { path: '/pages/reports/CollectionReportUserWise', title: 'Collection Report User Wise', type: 'link' },
-        //         { path: '/pages/reports/LogReport', title: 'Log Report ', type: 'link' },
-        //     ]
-        // },
-    );
- }
-  else if(UserType=='3')
-  {
- menuT.push(
-    {
-        title: 'Dashboard', icon: Home, type: 'link', path: '/user/dashboard', active: true
-    },
-    {
-        title: 'Outbound Calls', icon: Headphones, type: 'sub', active: false, children: [
-            { path: '/user/outbound/assignedcalls', title: 'Assigned Calls', type: 'link' },
-            // { path: '/pages/outboundCalling/UnassignedLeads', title: 'Unassign Calls', type: 'link' },
-            // { path: '/pages/outboundCalling/CustomerFollowUp', title: 'Customer Follow Up', type: 'link' },
-        ]
-    }
- );
-  }
+let hasMatch1="";
+const UserType=localStorage.UserType == undefined && localStorage.UserType ==null? "" : localStorage.getItem('UserType');
+const UserGroupDetails=localStorage.UserGroups == undefined && localStorage.UserGroups ==null? "" : JSON.parse(localStorage.getItem('UserGroups'));
 
-export const MENUITEMS =menuT 
+ if(UserGroupDetails!=null && UserGroupDetails!= undefined && UserGroupDetails!="" &&UserType!='' &&UserGroupDetails.length>0)
+ {
+    const pathnameHit = window.location.pathname;
+
+    if(pathnameHit=='/dashboard' )
+    {
+       if (UserType=== "0" ||UserType=== "2" ||UserType=== "1") {
+        window.location.assign(`${process.env.PUBLIC_URL}/admin/dashboard`);  }
+           else if (UserType=== "3") {
+           window.location.assign(`${process.env.PUBLIC_URL}/user/dashboard`);
+        }
+        else{
+          window.location.assign(`${process.env.PUBLIC_URL}/login`); 
+        }
+    }
+      if(pathnameHit!='/' && pathnameHit!='/dashboard' && pathnameHit!='/accessDenied')
+      {
+        const hasMatch=UserGroupDetails.some(function (d) {
+          return d.PageURL ==pathnameHit 
+       });
+       hasMatch1=hasMatch;
+        // if(hasMatch1==false)
+        // {
+        //   window.location.assign(`${process.env.PUBLIC_URL}/accessDenied`);
+        // }
+        
+        // else{
+        //     if (UserType=== "0" ||UserType=== "2" ||UserType=== "1") {
+
+        //         window.location.assign(`${process.env.PUBLIC_URL}/admin/dashboard`);
+    
+        //     }
+        //     else if (UserType=== "3") {
+        //         window.location.assign(`${process.env.PUBLIC_URL}/user/dashboard`);
+        //     }
+        // }
+       
+      }
+      
+     
+     let i=0;
+    UserGroupDetails.map((item)=>{
+        let menurow=
+        {
+            title:'', 
+            icon: Users,
+             type:'' , 
+             active:false,
+             PageId:'',
+             Level:'', 
+             children:[] 
+        }
+        
+    if(item.Level=="1")
+    {
+    
+      menurow=
+        {
+            title: item.PageName, 
+            icon: Users,
+             type:item.PageURL==''?'sub':'link', 
+             active:i=='0'?true:false,
+             path:item.PageURL==''?'':item.PageURL, 
+             PageId:item.PageId,
+             Level:item.Level, 
+             children:[] 
+        }
+        menuT.push(menurow);
+    }
+     i++;
+    });
+
+  ////********SubChild**************//
+  menuT.map((item1)=>{
+    let Childrow=
+    {
+        title:'', 
+         type:'' , 
+         active:false,
+         PageId:'',
+         Level:'',  
+         path: '' 
+    }
+   let ChildArr=[];
+UserGroupDetails.map((val)=>{
+
+     if(val.ParentId==item1["PageId"])
+    {
+        Childrow=
+            {
+                title:val.PageName, 
+                 type:val.PageURL==''?'sub':'link', 
+                 active:false,
+                 PageId:val.PageId,
+                 Level:val.Level,   
+                 path:val.PageURL 
+            }
+            ChildArr.push(Childrow);
+            item1["children"]= ChildArr;
+        }   
+}); 
+
+  });
+ }
+ 
+ export const MENUITEMS = menuT;

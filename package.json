@@ -2,7 +2,7 @@
   "name": "atulaya",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://10.0.1.92:1013/",
+  "homepage": "http://10.0.1.98:1013/",
   "dependencies": {
     "@auth0/auth0-react": "^1.1.0",
     "@fullcalendar/daygrid": "^4.4.2",

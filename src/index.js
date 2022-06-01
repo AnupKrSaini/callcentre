@@ -34,7 +34,7 @@ import Signin from './auth/signin';
 import configDB from './data/customizer/config'
 
 import Callback from './auth/callback'
-
+import AccessDenied from './pages/AccessDenied'
 
 
 
@@ -51,12 +51,7 @@ const Root = (props) => {
     const [UserType, SetUserType] = useState(localStorage.UserType == undefined ? "" : localStorage.UserType);
     const [ActiveUser, SetActiveUser] = useState(localStorage.Session == undefined ? "" : localStorage.Session);
     const [LoginUser, SetLoginUser] = useState(localStorage.LoggedInUser == undefined ? "" : localStorage.LoggedInUser);
-    //  localStorage.setItem('Session', "Active");
-    //  localStorage.setItem('LoggedInUser', ds.UserId);
-    //  localStorage.setItem('UName',ds.UserName);
-    //  localStorage.setItem('UserTypeName',ds.UserTypeName);
-    //  localStorage.setItem('UserType',ds.UserTypeId);
-
+   
     const handleOnIdle = event => {
 
         //console.log('user is idle', event);
@@ -130,13 +125,7 @@ const Root = (props) => {
         // eslint-disable-next-line
     }, []);
 
-    async function CheckActiveUsers() {
-
-        if (LoginUser != null && ActiveUser == 'Active' && (UserType == "1" || UserType == "2")) {
-            window.location.href = `${process.env.PUBLIC_URL}/admin/dashboard`;
-        }
-
-    }
+  
     useEffect(() => {
        
             const id = setInterval(() => {
@@ -314,7 +303,7 @@ async function AutopbxclickpullindexDetails()
                             <Route path={`${process.env.PUBLIC_URL}/forgetPwd`} component={ForgetPwd} />
                             <Route path={`${process.env.PUBLIC_URL}/resetPwd`} component={ResetPwd} />
                             <Route path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback />} />
-
+                            <Route path={`${process.env.PUBLIC_URL}/accessDenied`} caseSensitive={false} component={AccessDenied} /> 
                             <App >
                                 <Nav/>
                             </App>

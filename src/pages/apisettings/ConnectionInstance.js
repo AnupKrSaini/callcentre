@@ -1,7 +1,7 @@
  import axios from 'axios';
  
  import React from 'react';
-
+ //const  ConnectionInstance ='http://10.0.1.98:1014/api/';
 // const  ConnectionInstance ='https://devcallcentreapi.atulaya.com/api/';
   //const  ConnectionInstance ='http://10.0.1.92:1014/api/';
 const  ConnectionInstance ='https://localhost:44348/api/';
